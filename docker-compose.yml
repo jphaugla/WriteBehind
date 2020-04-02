@@ -1,0 +1,61 @@
+version: '3.7'
+services:
+  mysql_db_container:
+    image: mysql:latest
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_PASSWORD: mysqlpassword
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_db_data_container:/var/lib/mysql
+      - ../rgsync:/home/jovyan/rgsync
+      - ../RedisGears:/home/jovyan/RedisGears
+      - ./python_src:/home/jovyan/python_src
+
+  adminer_container:
+    image: adminer:latest
+    container_name: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_db_container
+    ports:
+      - 8080:8080
+
+  redis:
+    image: "redislabs/redisgears:edge"
+    container_name: redisgears
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+      - ../rgsync:/home/jovyan/rgsync
+      - ../RedisGears:/home/jovyan/RedisGears
+      - ./python_src:/home/jovyan/python_src
+
+  insight:
+    image: "redislabs/redisinsight:latest"
+    container_name: insight
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./redisinsight:/db
+    depends_on:
+      - redis
+
+  jupyter:
+    image: jupyter/minimal-notebook
+    volumes:
+      - ../rgsync:/home/jovyan/rgsync
+      - ../RedisGears:/home/jovyan/RedisGears
+      - ./python_src:/home/jovyan/python_src
+    ports:
+      - 8888:8888
+    container_name: jupyter
+    depends_on:
+      - redis
+
+volumes:
+    mysql_db_data_container:
+    db_data: {}
