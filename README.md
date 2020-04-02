@@ -1,9 +1,12 @@
-# redisJupyter
-redis Jupyter notebooks covering redis concepts
+# WriteBehind
+redis write behind to mysql
+this requires two other githubs at the same level as this github
 ## Initial project setup
-Get this github code
+Get this github code and other two needed githubs
 ```bash 
-git clone https://github.com/jphaugla/redisJupyter.git
+git clone git@github.com:RedisGears/rgsync.git
+git clone git@github.com:RedisGears/RedisGears.git
+git clone https://github.com/jphaugla/WriteBehind.git
 ```
 ## docker compose startup
 ```bash
