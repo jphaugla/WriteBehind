@@ -34,9 +34,17 @@ connection = MySqlConnection('test', 'passwd!', 'mysql:3306/test')
 ```bash
 docker exec -it jupyter bash -c "python ./RedisGears/recipes/gears.py --host redis --port 6379 ./rgsync/example.py REQUIREMENTS git+https://github.com/RedisGears/rgsync.git#0.1 PyMySQL"
 ```
-### open redisinsights
-http://localhost:8001
-*  add a redis database
-Click on "ADD REDIS DATABASE"
-![adding redisDB](images/redisinsightAddDB.png)
-###
+### NOT WORKING
+I ran out of time to look at this and left it with this error
+```bash
+Traceback (most recent call last):
+  File "./RedisGears/recipes/gears.py", line 47, in <module>
+    reply = r.execute_command(*q)
+  File "/opt/conda/lib/python3.7/site-packages/redis/client.py", line 878, in execute_command
+    return self.parse_response(conn, command_name, **options)
+  File "/opt/conda/lib/python3.7/site-packages/redis/client.py", line 892, in parse_response
+    response = connection.read_response()
+  File "/opt/conda/lib/python3.7/site-packages/redis/connection.py", line 752, in read_response
+    raise response
+redis.exceptions.ResponseError: Could not satisfy requirments
+```
