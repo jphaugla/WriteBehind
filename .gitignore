@@ -131,3 +131,6 @@ dmypy.json
 # Eclipse
 .project
 .pydevproject
+# docker
+./redisinsight
+./redis_data

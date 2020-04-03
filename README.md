@@ -4,7 +4,7 @@ this requires two other githubs at the same level as this github
 ## Initial project setup
 Get this github code and other two needed githubs
 ```bash 
-git clone git@github.com:RedisGears/rgsync.git
+git clone --single-branch --branch 0.1 git@github.com:RedisGears/rgsync.git
 git clone git@github.com:RedisGears/RedisGears.git
 git clone https://github.com/jphaugla/WriteBehind.git
 ```
@@ -24,7 +24,7 @@ docker exec -it jupyter bash -c "pip install -r ./rgsync/requirements.txt"
 ```
 ### run the gears script
 ```bash
-docker exec -it jupyter bash -c "python ./RedisGears/recipes/gears.py --host redis --port 6379 ./rgsync/example.py REQUIREMENTS git+https://github.com/RedisGears/rgsync.git PyMySQL"
+docker exec -it jupyter bash -c "python ./RedisGears/recipes/gears.py --host redis --port 6379 ./rgsync/example.py REQUIREMENTS git+https://github.com/jphaugla/rgsync.git#0.1 PyMySQL"
 ```
 ### open redisinsights
 http://localhost:8001
